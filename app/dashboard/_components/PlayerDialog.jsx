@@ -23,8 +23,12 @@ const PlayerDialog = ({playVideo, videoId}) => {
     const router = useRouter();
 
     useEffect(() => {
-        setOpenDialog(!openDialog);
-        if(videoId) {
+        // setOpenDialog(!openDialog);
+        // if(videoId) {
+        //   GetVideoData();
+        // }
+        if (playVideo && videoId) {
+          setOpenDialog(true);
           GetVideoData();
         }
     }, [playVideo, videoId]);
@@ -36,6 +40,11 @@ const PlayerDialog = ({playVideo, videoId}) => {
         // setOpenDialog(false);
         console.log("value from database", result[0]);
     }
+
+    const handleClose = () => {
+      setOpenDialog(false);
+      router.replace("/dashboard");
+    };
 
   return (
     <Dialog open={openDialog}>
@@ -56,7 +65,7 @@ const PlayerDialog = ({playVideo, videoId}) => {
               }}
             />
             <div className="flex gap-10 mt-10">
-                <Button variant="ghost" onClick={() => {router.replace('/dashboard/create-new'); setOpenDialog(false)}}>Cancel</Button>
+                <Button variant="ghost" onClick={handleClose}>Cancel</Button>
 
 
 

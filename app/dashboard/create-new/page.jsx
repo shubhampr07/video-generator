@@ -221,7 +221,7 @@ const CreateNew = () => {
         </Button>
       </div>
       <CustomLoading loading={loading} />
-      <PlayerDialog playVideo={playVideo} videoId={videoId} />
+      <PlayerDialog playVideo={false} videoId={videoId} />
     </div>
   );
 };
