@@ -1,7 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button'
 import { PlusCircleIcon } from 'lucide-react'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Empty from './_components/Empty'
 import Link from 'next/link'
 import { useUser } from '@clerk/nextjs'
@@ -9,11 +9,13 @@ import { db } from '@/configs/db'
 import { VideoData } from '@/configs/schema'
 import { eq } from 'drizzle-orm'
 import VideoList from './_components/VideoList'
+import { UserDetailContext } from '../_context/UserDetailContext'
 
 
 const DashboardPage = () => {
 
     const [videoList, setVideoList] = useState([]);
+    // const {userDetail, setUserDetail} = useContext(UserDetailContext);
     const {user} = useUser();
 
     useEffect(() => {

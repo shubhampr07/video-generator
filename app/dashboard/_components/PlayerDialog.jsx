@@ -33,6 +33,7 @@ const PlayerDialog = ({playVideo, videoId}) => {
         const result = await db.select().from(VideoData)
         .where(eq(VideoData.id, videoId));
         setVideoData(result[0]);
+        setOpenDialog(false);
         console.log("value from database", result[0]);
     }
 

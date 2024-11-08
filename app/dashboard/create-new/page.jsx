@@ -10,21 +10,25 @@ import { v4 as uuidv4 } from "uuid";
 import { VideoDataContext } from "@/app/_context/VideoDataContext";
 import { db } from "@/configs/db";
 import { useUser } from "@clerk/nextjs";
-import { VideoData } from "@/configs/schema";
+import { Users, VideoData } from "@/configs/schema";
 import PlayerDialog from "../_components/PlayerDialog";
 import { useRouter } from "next/navigation";
+import { UserDetailContext } from "@/app/_context/UserDetailContext";
+import { toast } from "sonner";
+import { eq } from "drizzle-orm";
 
 
 const CreateNew = () => {
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [videoScript, setVideoScript] = useState(null);  // Initialize as null
+  const [videoScript, setVideoScript] = useState(null);
   const [audioFileUrl, setAudioFileUrl] = useState();
   const [imageList, setImageList] = useState([]);
   const [captions, setCaptions] = useState();
   const [playVideo, setPlayVideo] = useState(true);
   const [videoId, setVideoId] = useState(6);
   const {videoData, setVideoData} = useContext(VideoDataContext);
+  const {userDetail, setUserDetail} = useContext(UserDetailContext);
   const {user} = useUser();
 
   const onHandleInputChange = (fieldName, fieldValue) => {
@@ -35,17 +39,15 @@ const CreateNew = () => {
   };
 
   const onCreateClickHandler = async () => {
-    setLoading(true);
-    try {
-      await GetVideoScript();
-      // await generateImages()
-    } catch (error) {
-      console.error("Error in create process:", error);
-      setLoading(false);
-    }
+    // if (!userDetail?.credits <= 10) {
+    //   toast("You don't have enough Credits.")
+    //   return;
+    // }
+    GetVideoScript();
   };
 
   const GetVideoScript = async () => {
+    setLoading(true);
     try {
       console.log("Getting video script...");
       const prompt =
@@ -182,6 +184,7 @@ const CreateNew = () => {
       createdBy:user?.primaryEmailAddress?.emailAddress,
     }).returning({id:VideoData?.id})
 
+    await UpdateUserCredits();
     setVideoId(result[0].id);
     setPlayVideo(true);
     console.log(result);
@@ -192,6 +195,19 @@ const CreateNew = () => {
     setLoading(false);
   }
   };
+
+  const UpdateUserCredits = async () => {
+    const result = await db.update(Users).set({
+      credits: userDetail?.credits - 5
+    }).where(eq(Users.email, user?.primaryEmailAddress?.emailAddress));
+
+    setUserDetail(prev => ({
+      ...prev,
+      "credits": userDetail?.credits - 5
+    }))
+
+    setVideoData(null);
+  }
 
   return (
     <div className="md:px-20">
