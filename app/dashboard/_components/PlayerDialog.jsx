@@ -33,7 +33,7 @@ const PlayerDialog = ({playVideo, videoId}) => {
         const result = await db.select().from(VideoData)
         .where(eq(VideoData.id, videoId));
         setVideoData(result[0]);
-        setOpenDialog(false);
+        // setOpenDialog(false);
         console.log("value from database", result[0]);
     }
 
@@ -56,7 +56,7 @@ const PlayerDialog = ({playVideo, videoId}) => {
               }}
             />
             <div className="flex gap-10 mt-10">
-                <Button variant="ghost" onClick={() => {router.replace('/dashboard'); setOpenDialog(false)}}>Cancel</Button>
+                <Button variant="ghost" onClick={() => {router.replace('/dashboard/create-new'); setOpenDialog(false)}}>Cancel</Button>
 
 
 
