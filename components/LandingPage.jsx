@@ -185,6 +185,161 @@ const LandingPage = () => {
         </div>
       </div>
 
+      {/* Demo Videos Section */}
+      <div className="bg-white py-20">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">See AI in Action</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">Watch how our AI transforms simple prompts into stunning videos</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Product Showcase",
+                description: "A dynamic product demonstration video",
+                thumbnail: "/demo1.jpg",
+                views: "2.4k"
+              },
+              {
+                title: "Travel Vlog",
+                description: "AI-generated travel highlights reel",
+                thumbnail: "/demo2.jpg",
+                views: "1.8k"
+              },
+              {
+                title: "Educational Content",
+                description: "Engaging educational video series",
+                thumbnail: "/demo3.jpg",
+                views: "3.2k"
+              }
+            ].map((demo, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                <div className="aspect-video relative">
+                  <Image
+                    src={demo.thumbnail}
+                    alt={demo.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <Button variant="ghost" className="text-white border-2 border-white hover:bg-white/20">
+                      Watch Demo
+                    </Button>
+                  </div>
+                </div>
+                <div className="p-6 bg-white">
+                  <h3 className="text-xl font-bold mb-2">{demo.title}</h3>
+                  <p className="text-gray-600 mb-3">{demo.description}</p>
+                  <div className="flex items-center text-sm text-gray-500">
+                    <span>{demo.views} views</span>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Community Section */}
+      <div className="bg-gradient-to-b from-blue-50 to-white py-20">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-4">Join Our Creative Community</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">See what creators are making with our AI video generator</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                name: "Sarah Johnson",
+                role: "Content Creator",
+                avatar: "/avatar2.jpg",
+                testimonial: "This tool has revolutionized my content creation process. I can now produce professional videos in minutes!",
+                rating: 5
+              },
+              {
+                name: "Mike Chen",
+                role: "Digital Marketer",
+                avatar: "/avatar1.jpg",
+                testimonial: "The AI understands exactly what I need. The quality of videos is outstanding, saving me hours of work.",
+                rating: 5
+              },
+              {
+                name: "Emma Davis",
+                role: "YouTuber",
+                avatar: "/avatar1.jpg",
+                testimonial: "Game-changing platform for creating engaging social media content. The variety of styles is impressive!",
+                rating: 5
+              }
+            ].map((testimonial, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
+                    <Image
+                      src={testimonial.avatar}
+                      alt={testimonial.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg">{testimonial.name}</h3>
+                    <p className="text-gray-600 text-sm">{testimonial.role}</p>
+                  </div>
+                </div>
+                <p className="text-gray-700 mb-4">"{testimonial.testimonial}"</p>
+                <div className="flex text-yellow-400">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <Link href="/dashboard">
+              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105 hover:shadow-lg">
+                Join Our Community
+              </Button>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-10">
         <div className="container mx-auto px-4">
