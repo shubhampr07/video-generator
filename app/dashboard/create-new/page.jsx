@@ -211,12 +211,19 @@ const CreateNew = () => {
 
   return (
     <div className="md:px-20">
-      <h2 className="font-bold text-2xl text-primary text-center">Create New</h2>
-      <div className="mt-10 shadow-md p-10">
+      <div className="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl p-6 mb-8 shadow-sm">
+        <h2 className="font-bold text-2xl text-teal-600 dark:text-teal-400 text-center">Create Your Video</h2>
+        <p className="text-gray-600 dark:text-gray-400 text-center mt-2 max-w-2xl mx-auto">Customize your AI-generated video by selecting content, style, and duration</p>
+      </div>
+      
+      <div className="mt-6 bg-white dark:bg-gray-800 rounded-xl shadow-md p-8 border border-teal-100 dark:border-teal-900/20">
         <SelectTopic onUserSelect={onHandleInputChange} />
         <SelectStyle onUserSelect={onHandleInputChange} />
         <SelectDuration onUserSelect={onHandleInputChange} />
-        <Button className="mt-10 w-full" onClick={onCreateClickHandler}>
+        <Button 
+          className="mt-10 w-full bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white py-6 rounded-lg shadow-md hover:shadow-lg transition-all duration-300" 
+          onClick={onCreateClickHandler}
+        >
           Create Short Video
         </Button>
       </div>

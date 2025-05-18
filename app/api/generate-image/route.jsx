@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import Replicate from "replicate";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import { storage } from "@/configs/FirebaseConfig";
+import axios from "axios";
 
 export async function POST(req) {
     try {
@@ -17,7 +18,7 @@ export async function POST(req) {
             num_outputs: 1
         };
 
-        const output = await replicate.run("bytedance/sdxl-lightning", { input });
+        const output = await replicate.run("bytedance/sdxl-lightning-4step:5599ed30703defd1d160a25a63321b4dec97101d98b4674bcc56e41f62f35637", { input });
         console.log(output);
 
         const base64Image = "data:image/png;base64,"+await convertImage(output[0]);
